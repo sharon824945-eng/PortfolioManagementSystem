@@ -1,19 +1,18 @@
-
-	package com.portfolio.app.model;
+package com.portfolio.app.model;
 
 import com.portfolio.app.model.User2;
 import com.portfolio.app.model.Stock;
 import com.portfolio.app.model.MutualFund;
 import com.portfolio.app.model.holding;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main5 {
 
     // Store all users
-    static List<User2> users = new ArrayList<>();
+    static Map<String, User2> users = new HashMap<>();
 
     public static void main(String[] args) {
 
@@ -62,7 +61,7 @@ public class Main5 {
                     User2 newUser = new User2(userid, name, email);
 
                     // Add user to users list
-                    users.add(newUser);
+                    users.put(userid, newUser);
 
                     System.out.println("User created successfully!");
 
@@ -76,9 +75,7 @@ public class Main5 {
                 case 2:
 
                     if (users.isEmpty()) {
-
                         System.out.println("Please create a user first.");
-
                         break;
                     }
 
@@ -91,9 +88,7 @@ public class Main5 {
                     User2 stockUser = findUser(stockUserId);
 
                     if (stockUser == null) {
-
                         System.out.println("User not found.");
-
                         break;
                     }
 
@@ -145,9 +140,7 @@ public class Main5 {
                 case 3:
 
                     if (users.isEmpty()) {
-
                         System.out.println("Please create a user first.");
-
                         break;
                     }
 
@@ -160,9 +153,7 @@ public class Main5 {
                     User2 mfUser = findUser(mfUserId);
 
                     if (mfUser == null) {
-
                         System.out.println("User not found.");
-
                         break;
                     }
 
@@ -192,7 +183,7 @@ public class Main5 {
                             mfPurchasePrice,
                             nav
                     );
-
+  
                     holding mfHolding = new holding(
                             mfHoldingId,
                             mutualFund,
@@ -221,11 +212,11 @@ public class Main5 {
 
                         System.out.println("\n--- User Details ---");
 
-                        for (User2 user : users) {
+                        for (User2 user : users.values()) {
 
                             user.display();
 
-                            System.out.println("----------------------------");
+                            System.out.println("--------------------------------");
                         }
                     }
 
@@ -247,7 +238,7 @@ public class Main5 {
 
                     System.out.println("\n--- Holdings ---");
 
-                    for (User2 user : users) {
+                    for (User2 user : users.values()) {
 
                         System.out.println("\nUser ID: " + user.getUserid());
                         System.out.println("User Name: " + user.getName());
@@ -302,14 +293,6 @@ public class Main5 {
 
     public static User2 findUser(String userid) {
 
-        for (User2 user : users) {
-
-            if (user.getUserid().equals(userid)) {
-
-                return user;
-            }
-        }
-
-        return null;
+        return users.get(userid);
     }
 }
