@@ -1,48 +1,47 @@
+package com.portfolio.app.model;
 
+public class MutualFund extends Asset {
 
-	package com.portfolio.app.model;
+    private double nav;
 
-	public class MutualFund extends Asset {
+    // Default constructor - required for Jackson
+    public MutualFund() {
+        super();
+    }
 
-	    private double nav;
+    // Parameterized constructor
+    public MutualFund(String assetId,
+                      String assetName,
+                      double purchasePrice,
+                      double nav) {
 
-	    // Constructor
-	    public MutualFund(String assetId,
-	                      String assetName,
-	                      double purchasePrice,
-	                      double nav) {
+        super(assetId, assetName, purchasePrice);
+        this.nav = nav;
+    }
 
-	        super(assetId, assetName, purchasePrice);
+    // Method overriding
+    @Override
+    public double calculateCurrentValue() {
+        return nav;
+    }
 
-	        this.nav = nav;
-	    }
+    // Getter
+    public double getNav() {
+        return nav;
+    }
 
-	    // Method overriding
-	    @Override
-	    public double calculateCurrentValue() {
-	        return nav;
-	    }
+    // Setter
+    public void setNav(double nav) {
+        this.nav = nav;
+    }
 
-	    // Getter
-	    public double getNav() {
-	        return nav;
-	    }
-
-	    // Setter
-	    public void setNav(double nav) {
-	        this.nav = nav;
-	    }
-
-	    // toString method
-	    @Override
-	    public String toString() {
-	        return "MutualFund{" +
-	                "Asset ID='" + getAssetId() + '\'' +
-	                ", Asset Name='" + getAssetName() + '\'' +
-	                ", Purchase Price=" + getPurchasePrice() +
-	                ", NAV=" + nav +
-	                '}';
-	    }
-	}
-
-
+    @Override
+    public String toString() {
+        return "MutualFund{" +
+                "Asset ID='" + getAssetId() + '\'' +
+                ", Asset Name='" + getAssetName() + '\'' +
+                ", Purchase Price=" + getPurchasePrice() +
+                ", NAV=" + nav +
+                '}';
+    }
+}
