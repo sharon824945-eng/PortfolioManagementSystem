@@ -1,60 +1,23 @@
- package com.portfolio.app.model;
+package com.InventorySystem;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type"
-)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Stock.class, name = "stock"),
-        @JsonSubTypes.Type(value = MutualFund.class, name = "mutualFund")
-})
 public abstract class Asset {
 
-    private String assetId;
-    private String assetName;
-    private double purchasePrice;
 
-    // Default constructor - required for Jackson
-    public Asset() {
+    private String id;
+    private String name;
+
+    public Asset(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    // Parameterized constructor
-    public Asset(String assetId, String assetName, double purchasePrice) {
-        this.assetId = assetId;
-        this.assetName = assetName;
-        this.purchasePrice = purchasePrice;
+    public String getId() {
+        return id;
     }
 
-    // Getters
-    public String getAssetId() {
-        return assetId;
+    public String getName() {
+        return name;
     }
 
-    public String getAssetName() {
-        return assetName;
-    }
-
-    public double getPurchasePrice() {
-        return purchasePrice;
-    }
-
-    // Setters - required for Jackson
-    public void setAssetId(String assetId) {
-        this.assetId = assetId;
-    }
-
-    public void setAssetName(String assetName) {
-        this.assetName = assetName;
-    }
-
-    public void setPurchasePrice(double purchasePrice) {
-        this.purchasePrice = purchasePrice;
-    }
-
-    // Abstract method
-    public abstract double calculateCurrentValue();
+    public abstract void display();
 }
